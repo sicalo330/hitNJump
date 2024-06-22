@@ -75,6 +75,7 @@ void Update()
     }
 
     private void getKilled(){
+        FXManager.obj.showPop(transform.position);
         gameObject.SetActive(false);
     }
 }
