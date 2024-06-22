@@ -21,7 +21,8 @@ public class Player : MonoBehaviour
     public float radius = 0.3f;
     public float groundRayDist = 0.5f;
 
-    private Rigidbody2D rb;
+    //Tengo que ponerlo en public para que el personaje pueda saltar cuando aplasta a un enemigo
+    public Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer spr;
 
@@ -70,6 +71,7 @@ public class Player : MonoBehaviour
         lives --;
         if(lives <= 0){
             this.gameObject.SetActive(false);
+            Game.obj.gameOver();
         }
     }
 

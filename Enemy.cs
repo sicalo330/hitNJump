@@ -59,16 +59,17 @@ void Update()
         rb.velocity = new Vector2(movHor * speed, rb.velocity.y);
     }
 
-    void OnCollisionEnter2D(Collision2D collision) {
+    void OnCollisionEnter2D(Collision2D collision){
         //Dañará a Player
         if(collision.gameObject.CompareTag("Player")){
             Player.obj.getDamage();
         }
     }
 
-    void OnTriggerEnter2D(Collider2D collision) {
+    void OnTriggerEnter2D(Collider2D collision){
         //Dañará al enemigo
         if(collision.gameObject.CompareTag("Player")){
+            Player.obj.rb.velocity = Vector2.up * (Player.obj.jumpForce/2);
             getKilled();
         }
     }
