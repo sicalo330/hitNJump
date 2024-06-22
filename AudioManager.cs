@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public static AudioManager obj;
+    
+    public AudioClip jump; 
+    public AudioClip coin; 
+    public AudioClip gui; 
+    public AudioClip hit; 
+    public AudioClip enemyHit; 
+    public AudioClip win;
+
+    private AudioSource audioSrc; 
+
+    private void Awake(){
+        obj = this;
+        audioSrc = gameObject.AddComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void playJump(){playSound(jump);}
+    public void playCoin(){playSound(coin);}
+    public void playGui(){playSound(gui);}
+    public void playHit(){playSound(hit);}
+    public void playEnemyHit(){playSound(enemyHit);}
+    public void playWin(){playSound(win);}
+
+    public void playSound(AudioClip clip){
+        audioSrc.PlayOneShot(clip);
     }
+
+    private void OnDestroy(){
+        obj = null;
+    }
+    
 }

@@ -62,6 +62,7 @@ void Update()
     void OnCollisionEnter2D(Collision2D collision){
         //Dañará a Player
         if(collision.gameObject.CompareTag("Player")){
+            AudioManager.obj.playEnemyHit();
             Player.obj.getDamage();
         }
     }
@@ -70,6 +71,7 @@ void Update()
         //Dañará al enemigo
         if(collision.gameObject.CompareTag("Player")){
             Player.obj.rb.velocity = Vector2.up * (Player.obj.jumpForce/2);
+            AudioManager.obj.playHit();
             getKilled();
         }
     }

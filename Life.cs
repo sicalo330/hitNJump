@@ -10,6 +10,7 @@ public class Heart : MonoBehaviour
         if(collision.gameObject.CompareTag("Player")){
             Game.obj.addScore(scoreGive);
             Player.obj.addLive();
+            AudioManager.obj.playCoin();
             gameObject.SetActive(false);
         }
     }

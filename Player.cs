@@ -48,10 +48,21 @@ public class Player : MonoBehaviour
         isGrounded = Physics2D.CircleCast(transform.position, radius, Vector3.down, groundRayDist, groundLayer);
 
         if(Input.GetKeyDown(KeyCode.Space)){
+            AudioManager.obj.playJump();
             jump();
         }
 
         flip(movHor);
+
+        if(isInmune){
+            spr.enabled = !spr.enabled;
+            //Lode abajo hace que el sprite parpadee
+            inmuneTimeCnt -= Time.deltaTime;
+            if(inmuneTimeCnt <= 0){
+                isInmune = false;
+                spr.enabled = true;
+            }
+        }
 
         anim.SetBool("isMoving", isMoving);
         anim.SetBool("isGrounded", isGrounded);
@@ -66,9 +77,15 @@ public class Player : MonoBehaviour
         obj = null;    
     }
     
+    private void goImmune(){
+        isInmune = true;
+        inmuneTimeCnt = inmuneTime;
+    }
 
     public void getDamage(){
         lives --;
+        //Esta función sirve para volver inmune por unos segundos al personaje
+        goImmune();
         if(lives <= 0){
             FXManager.obj.showPop(transform.position);
             Game.obj.gameOver();
