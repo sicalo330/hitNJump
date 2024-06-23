@@ -11,6 +11,9 @@ public class Heart : MonoBehaviour
             Game.obj.addScore(scoreGive);
             Player.obj.addLive();
             AudioManager.obj.playCoin();
+            UIManager.obj.updateScore();
+            UIManager.obj.updateLives();
+            FXManager.obj.showPop(transform.position);
             gameObject.SetActive(false);
         }
     }

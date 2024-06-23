@@ -18,7 +18,8 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gamePaused = false;    
+        gamePaused = false;  
+        UIManager.obj.StartGame();  
     }
 
     public void addScore(int scoreGive){

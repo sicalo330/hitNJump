@@ -31,6 +31,12 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
 void Update()
 {
+    if(Game.obj.gamePaused){
+        //El return en c# al parecer es como un return 0 en c++
+        movHor = 0f;
+        return;
+    }
+
     //Evitar caer en precipicio
     isGroundFloor = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - floorCheckY), Vector2.down, frontGrndRayDist, groundLayer);
     if (!isGroundFloor)
@@ -62,7 +68,6 @@ void Update()
     void OnCollisionEnter2D(Collision2D collision){
         //Dañará a Player
         if(collision.gameObject.CompareTag("Player")){
-            AudioManager.obj.playEnemyHit();
             Player.obj.getDamage();
         }
     }
@@ -71,7 +76,7 @@ void Update()
         //Dañará al enemigo
         if(collision.gameObject.CompareTag("Player")){
             Player.obj.rb.velocity = Vector2.up * (Player.obj.jumpForce/2);
-            AudioManager.obj.playHit();
+            AudioManager.obj.playEnemyHit();
             getKilled();
         }
     }

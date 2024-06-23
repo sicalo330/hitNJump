@@ -10,6 +10,7 @@ public class NewBehaviourScript : MonoBehaviour
         if(collision.gameObject.CompareTag("Player")){
             Game.obj.addScore(scoreGive);
             AudioManager.obj.playCoin();
+            UIManager.obj.updateScore();
             FXManager.obj.showPop(transform.position);
             gameObject.SetActive(false);
         }

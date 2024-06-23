@@ -43,6 +43,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Game.obj.gamePaused){
+            movHor = 0f;
+            return;
+        }
+
         movHor = Input.GetAxisRaw("Horizontal");
         isMoving = (movHor != 0f);
         isGrounded = Physics2D.CircleCast(transform.position, radius, Vector3.down, groundRayDist, groundLayer);
@@ -84,6 +89,9 @@ public class Player : MonoBehaviour
 
     public void getDamage(){
         lives --;
+        AudioManager.obj.playHit();
+        UIManager.obj.updateLives();
+        
         //Esta función sirve para volver inmune por unos segundos al personaje
         goImmune();
         if(lives <= 0){
